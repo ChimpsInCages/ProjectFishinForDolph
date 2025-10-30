@@ -48,7 +48,7 @@ public class scriptSceneManager : MonoBehaviour
     void FixedUpdate()
     {
         afkTimer = afkTimer + Time.deltaTime;
-        if (afkTimer > 120)
+        if (afkTimer > 60)
         {
             resetGame();
         }
