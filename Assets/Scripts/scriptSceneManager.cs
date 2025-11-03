@@ -14,6 +14,7 @@ public class scriptSceneManager : MonoBehaviour
     public GameObject finalScoreCounter;
     public TMP_Text scoreCounter;
     public TMP_Text finalScore;
+    
 
     //The scene manager sets all of the UI, as well as tracking the gamescore and the AFK timer
     private void Awake()
@@ -32,6 +33,7 @@ public class scriptSceneManager : MonoBehaviour
         startScreenUI.SetActive(true);
         scoreCounter = generalScoreCounter.GetComponent<TMP_Text>();
         finalScore = generalScoreCounter.GetComponent<TMP_Text>();
+        
 
         
     }

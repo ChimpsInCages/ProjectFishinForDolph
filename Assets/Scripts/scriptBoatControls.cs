@@ -49,6 +49,7 @@ public class scriptBoatControls : MonoBehaviour
             if(canNet)
             {
                 netGrab();
+                Debug.Log("Net");
 
             }
         }
@@ -69,6 +70,6 @@ public class scriptBoatControls : MonoBehaviour
     void netGrab()
     {
         netTimer = 2;
-        netTransform.localPosition = new Vector2(netTransform.position.x, netTransform.position.y + 5);
+        netTransform.localPosition = new Vector2(netTransform.position.x, netTransform.position.y - 10);
     }
 }
