@@ -35,8 +35,15 @@ public class dolphinControls : MonoBehaviour
         dolphinHorizontalInput = Input.GetAxisRaw("Horizontal2");
         dolphinVerticalInput = Input.GetAxisRaw("Vertical2");
  
-       
-        
+       if (Input.GetAxisRaw("Horizontal2") != 0)
+        {
+            scriptSceneManager.resetAFKTimer();
+        }
+        if (Input.GetAxisRaw("Vertical2") != 0)
+        {
+            scriptSceneManager.resetAFKTimer();
+        }
+
     }
     private void FixedUpdate()
     {

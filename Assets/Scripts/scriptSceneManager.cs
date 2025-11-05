@@ -10,6 +10,7 @@ public class scriptSceneManager : MonoBehaviour
 {
     public int gameScore;
     public float afkTimer = 0;
+    public float gameTimer = 180;
     public float fishSpwanTimer = 1;
     bool spawnStart = false;
     public GameObject winScreenUI;
@@ -19,6 +20,7 @@ public class scriptSceneManager : MonoBehaviour
     public GameObject finalScoreCounter;
     public GameObject prefabFish;
     public TMP_Text scoreCounter;
+    public TMP_Text hudTimer;
     public TMP_Text finalScore;
     Vector2 screenEdges;
     
@@ -39,7 +41,6 @@ public class scriptSceneManager : MonoBehaviour
         afkTimer = 0;
         startScreenUI.SetActive(true);
         scoreCounter = generalScoreCounter.GetComponent<TMP_Text>();
-        finalScore = generalScoreCounter.GetComponent<TMP_Text>();
         screenEdges = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         spawnStart = true;
 
@@ -51,15 +52,23 @@ public class scriptSceneManager : MonoBehaviour
     {
         startScreenUI.SetActive(false );
         generalUI.SetActive(true);
-        Time.timeScale = 1.0f;  
+        Time.timeScale = 1.0f;
+        resetAFKTimer();
         StartCoroutine(fishWave());
     }
     private void Update()
     {
         scoreCounter.text = gameScore.ToString();
+        hudTimer.text = gameTimer.ToString();
+        finalScore.text = gameScore.ToString();
     }
     void FixedUpdate()
     {
+        gameTimer = gameTimer - Time.deltaTime;
+        if (gameTimer <= 0)
+        {
+            endgameWrapup();
+        }
         afkTimer = afkTimer + Time.deltaTime;
         if (afkTimer > 60)
         {
@@ -72,9 +81,10 @@ public class scriptSceneManager : MonoBehaviour
     }
     public void endgameWrapup()
     {
+        finalScore.text = gameScore.ToString();
         winScreenUI.SetActive(true);
         generalUI.SetActive(false);
-        finalScore.text = gameScore.ToString();
+        Time.timeScale = 0;
     }
     public void resetAFKTimer()
     {
@@ -83,6 +93,7 @@ public class scriptSceneManager : MonoBehaviour
     public void resetGame()
     {
         gameScore = 0;
+        gameTimer = 180;
         afkTimer = 0;
         Time.timeScale = 0f;
         winScreenUI.SetActive(false);
