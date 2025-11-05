@@ -93,6 +93,7 @@ public class scriptSceneManager : MonoBehaviour
     public void resetGame()
     {
         gameScore = 0;
+        gameTimer = 180;
         afkTimer = 0;
         Time.timeScale = 0f;
         winScreenUI.SetActive(false);

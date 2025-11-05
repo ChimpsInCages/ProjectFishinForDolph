@@ -46,9 +46,17 @@ public class scriptBoatControls : MonoBehaviour
             scriptSceneManager.resetAFKTimer();
         }
         if (Input.GetButtonDown("Submit"))
-        {           
-            scriptSceneManager.gameStart();
-            scriptSceneManager.resetAFKTimer();
+        {   
+            if (scriptSceneManager.gameTimer < 178)
+            {
+                scriptSceneManager.resetGame();
+            }
+            else
+            {
+                scriptSceneManager.gameStart();
+                scriptSceneManager.resetAFKTimer();
+            }
+            
 
         }
         if (Input.GetButtonDown("Jump"))
