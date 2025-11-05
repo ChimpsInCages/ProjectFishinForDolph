@@ -18,6 +18,7 @@ public class scriptBoatControls : MonoBehaviour
     private float netTimer;
     Vector2 moveDirection;
     Vector2 netMove;
+    CircleCollider2D netCollider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,6 +31,7 @@ public class scriptBoatControls : MonoBehaviour
             scriptSceneManager = sceneManager.GetComponent<scriptSceneManager>();
         netTransform = boatNet.transform;
         netMove = netTransform.localPosition;
+        netCollider = playerBoat.GetComponent<CircleCollider2D>();
        
     }
 
@@ -62,10 +64,11 @@ public class scriptBoatControls : MonoBehaviour
         {
             canNet = true;
             boatNet.SetActive(false);
+            netCollider.enabled = false;
             
         }
         if (netTimer > 0)
-        {
+        {      
             canNet = false;
             netTimer = netTimer - Time.deltaTime;
         }
@@ -74,6 +77,7 @@ public class scriptBoatControls : MonoBehaviour
     {
         netTimer = 2;
         boatNet.SetActive(true);
+        netCollider.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

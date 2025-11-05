@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 300798}
   - component: {fileID: 300797}
   - component: {fileID: 300796}
+  - component: {fileID: 300800}
   m_Layer: 0
   m_Name: Boat Parent
   m_TagString: Untagged
@@ -257,6 +258,42 @@ Transform:
   - {fileID: 1454521304}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &300800
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300795}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -5.03}
+  m_Radius: 0.75
 --- !u!1 &118550344
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,11 +805,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScore: 0
   afkTimer: 0
+  fishSpwanTimer: 1
   winScreenUI: {fileID: 384426742}
   startScreenUI: {fileID: 1691923004}
   generalUI: {fileID: 1038024158}
   generalScoreCounter: {fileID: 1627430119}
   finalScoreCounter: {fileID: 737850443}
+  prefabFish: {fileID: 4291214220857383062, guid: 96c22d3afd281c5458fb5f34f66c9c96, type: 3}
   scoreCounter: {fileID: 737850445}
   finalScore: {fileID: 0}
 --- !u!4 &1108455325
@@ -972,7 +1011,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1454521304}
   - component: {fileID: 1454521306}
-  - component: {fileID: 1454521305}
   m_Layer: 0
   m_Name: Net
   m_TagString: Untagged
@@ -995,27 +1033,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 300799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1454521305
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1454521303}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.9975929, y: 1.9975929, z: 0.2}
-  m_Center: {x: 0.017605066, y: 0.0410769, z: 0}
 --- !u!212 &1454521306
 SpriteRenderer:
   m_ObjectHideFlags: 0
