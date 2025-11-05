@@ -34,12 +34,16 @@ public class dolphinControls : MonoBehaviour
     {
         dolphinHorizontalInput = Input.GetAxisRaw("Horizontal2");
         dolphinVerticalInput = Input.GetAxisRaw("Vertical2");
-        moveDirection = dolphinTransform.right * dolphinHorizontalInput + dolphinTransform.up * dolphinVerticalInput;
-        dolphinRB.AddForce(moveDirection * dolphinSpeed * 5f, ForceMode2D.Force);
+ 
        
         
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    private void FixedUpdate()
+    {
+        moveDirection = dolphinTransform.right * dolphinHorizontalInput + dolphinTransform.up * dolphinVerticalInput;
+        dolphinRB.AddForce(moveDirection * dolphinSpeed * 5f, ForceMode2D.Force);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Fish")
         {
