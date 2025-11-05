@@ -75,5 +75,23 @@ public class scriptSceneManager : MonoBehaviour
         winScreenUI.SetActive(false);
         generalUI.SetActive(false);
         startScreenUI.SetActive(true);
+<<<<<<< Updated upstream
+=======
+        
+    }
+    private void fishSpawn()
+    {
+        GameObject f = Instantiate(prefabFish) as GameObject;
+        f.transform.position = new Vector2(screenEdges.x * -2, UnityEngine.Random.Range(-screenEdges.y, screenEdges.y * 0.6f));
+    }
+    IEnumerator fishWave()
+    {
+        while (spawnStart == true)
+            {
+            yield return new WaitForSeconds(fishSpwanTimer);
+            fishSpawn();
+            }
+        
+>>>>>>> Stashed changes
     }
 }
