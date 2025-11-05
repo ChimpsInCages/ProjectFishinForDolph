@@ -6,13 +6,14 @@ using UnityEngine.EventSystems;
 public class dolphinControls : MonoBehaviour
 {
     public GameObject playerDolphin;
-    
-    
+    public GameObject sceneManager;
     public Rigidbody2D dolphinRB;
     public Transform dolphinTransform;
     
     public int dolphinSpeed;
-    public float dolphinHorizontalinput;
+    public float dolphinHorizontalInput;
+    public float dolphinVerticalInput;
+    scriptSceneManager scriptSceneManager;
     
     Vector2 moveDirection;
     
@@ -25,16 +26,25 @@ public class dolphinControls : MonoBehaviour
             Debug.Log("Player has successfully been found");
         }
         dolphinRB = playerDolphin.GetComponent<Rigidbody2D>();
+        scriptSceneManager = sceneManager.GetComponent<scriptSceneManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        dolphinHorizontalinput = Input.GetAxisRaw("Horizontal");
-        moveDirection = dolphinTransform.right * dolphinHorizontalinput;
+        dolphinHorizontalInput = Input.GetAxisRaw("Horizontal2");
+        dolphinVerticalInput = Input.GetAxisRaw("Vertical2");
+        moveDirection = dolphinTransform.right * dolphinHorizontalInput + dolphinTransform.up * dolphinVerticalInput;
         dolphinRB.AddForce(moveDirection * dolphinSpeed * 5f, ForceMode2D.Force);
        
         
     }
-   
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Fish")
+        {
+            other.gameObject.SetActive(false);
+            scriptSceneManager.addScore(100);
+        }
+    }
 }
