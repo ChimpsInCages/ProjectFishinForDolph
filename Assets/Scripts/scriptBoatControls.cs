@@ -42,7 +42,8 @@ public class scriptBoatControls : MonoBehaviour
         if (Input.GetButtonDown("Submit"))
         {           
             scriptSceneManager.gameStart();
-            
+            scriptSceneManager.resetAFKTimer();
+
         }
         if (Input.GetButtonDown("Jump"))
         {
@@ -50,6 +51,7 @@ public class scriptBoatControls : MonoBehaviour
             {
                 netGrab();
                 Debug.Log("Net");
+                scriptSceneManager.resetAFKTimer();
 
             }
         }
@@ -59,7 +61,8 @@ public class scriptBoatControls : MonoBehaviour
         if (netTimer <= 0)
         {
             canNet = true;
-            netTransform.localPosition = boatTransform.localPosition;
+            boatNet.SetActive(false);
+            
         }
         if (netTimer > 0)
         {
@@ -70,6 +73,14 @@ public class scriptBoatControls : MonoBehaviour
     void netGrab()
     {
         netTimer = 2;
-        netTransform.localPosition = new Vector2(netTransform.position.x, netTransform.position.y - 10);
+        boatNet.SetActive(true);
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Fish")
+        {
+            other.gameObject.SetActive(false);
+            scriptSceneManager.addScore(100);
+        }
     }
 }
