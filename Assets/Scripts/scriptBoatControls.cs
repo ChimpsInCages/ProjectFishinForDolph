@@ -41,6 +41,10 @@ public class scriptBoatControls : MonoBehaviour
         boatHorizontalinput = Input.GetAxisRaw("Horizontal");
         moveDirection = boatTransform.right * boatHorizontalinput; 
         boatRB.AddForce(moveDirection * boatSpeed * 5f, ForceMode2D.Force);
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            scriptSceneManager.resetAFKTimer();
+        }
         if (Input.GetButtonDown("Submit"))
         {           
             scriptSceneManager.gameStart();
