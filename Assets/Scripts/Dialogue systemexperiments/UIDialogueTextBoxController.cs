@@ -38,6 +38,51 @@ public class UIDialogueTextBoxController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (m_ListenToInput && Input.GetButtonDown("Submit"))
+        {
+            m_DialogueChannel.RaiseRequestedDialogueNode(m_NextNode);
+        }
+    }
+
+    private void OnDialogueNodeStart(DialogueNode node)
+    {
+        gameObject.SetActive(true);
+
+        m_DialogueText.text = node.DialogueLine.Text;
+        m_SpeakerText.text = node.DialogueLine.Speaker.CharacterName;
+
+        node.Accept(this);
+    }
+
+    private void OnDialogueNodeEnd(DialogueNode node)
+    {
+        m_NextNode = null;
+        m_ListenToInput = false;
+        m_DialogueText.text = "";
+        m_SpeakerText.text = "";
+
+        foreach (Transform child in m_ChoicesBoxTransform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        gameObject.SetActive(false);
+        m_ChoicesBoxTransform.gameObject.SetActive(false);
+    }
+
+    public void Visit(BasicDialogueNode node)
+    {
+        m_ListenToInput = true;
+        m_NextNode = node.NextNode;
+    }
+    public void Visit(ChoiceDialogueNode node)
+    {
+        m_ChoicesBoxTransform.gameObject.SetActive(true) ;
+
+        foreach (DialogueChoice choice in node.Choices)
+        {
+            UIDialogueTextBoxController newChoice = Instantiate(m_ChoiceControllePrefab, m_ChoicesBoxTransform);
+            newChoice.Choice = choice;
+        }
     }
 }

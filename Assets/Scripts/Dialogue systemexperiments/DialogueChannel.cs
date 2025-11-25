@@ -10,7 +10,7 @@ public class DialogueChannel : ScriptableObject
     public DialogueCallback OnDialogueEnd;
 
     public delegate void DialogueNodeCallback(DialogueNode node);
-    public DialogueNodeCallback OnDialogueNodeRequestedl;
+    public DialogueNodeCallback OnDialogueNodeRequested;
     public DialogueNodeCallback OnDialogueNodeStart;
     public DialogueNodeCallback OnDialogueNodeEnd;
 
@@ -21,5 +21,21 @@ public class DialogueChannel : ScriptableObject
     public void RaiseDialogueStart (Dialogue dialogue)
     {
         OnDialogueStart?.Invoke (dialogue);
+    }
+    public void RaiseDialogueEnd (Dialogue dialogue)
+    {
+        OnDialogueEnd?.Invoke (dialogue);
+    }
+    public void RaiseRequestDialogueNode(DialogueNode node)
+    {
+           OnDialogueNodeRequested?.Invoke (node);
+    }
+    public void RaiseDialogueNodeStart (DialogueNode node)
+    {
+        OnDialogueNodeStart?.Invoke (node);
+    }
+    public void RaiseDialogueNodeEnd (DialogueNode node)
+    {
+        OnDialogueNodeEnd?.Invoke (node);
     }
 }
